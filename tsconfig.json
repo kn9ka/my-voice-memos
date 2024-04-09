@@ -24,9 +24,10 @@
       "@/*": ["src/*"],
       "@app/*": ["src/app/*"],
       "@components/*": ["src/components/*"],
+      "@config/*": ["src/config/*"],
       "@assets/*": ["src/assets/*"],
-      "@layouts/*": ["src/shared/ui/layouts/*"],
-      "@config/*": ["src/config/*"]
+      "@shared/*": ["src/shared/*"],
+      "@widgets/*": ["src/widgets/*"]
     }
   },
   "include": ["src"],
