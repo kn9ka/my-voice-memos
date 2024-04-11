@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-flow: row nowrap;
+  place-items: center;
+  padding: var(--padding-medium);
+}
+
+.icons {
+  margin: 0 0 0 auto;
+
+  > a {
+    color: #fff;
+    text-decoration: none;
+  }
+}

@@ -1,3 +1,4 @@
+import "regenerator-runtime";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
