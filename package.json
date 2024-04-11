@@ -14,14 +14,20 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
+    "@types/react-speech-recognition": "^3.9.5",
     "classnames": "^2.5.1",
+    "dexie": "^4.0.4",
+    "dexie-react-hooks": "^1.1.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-speech-recognition": "^3.10.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^20.12.5",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",

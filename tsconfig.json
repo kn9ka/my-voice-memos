@@ -23,9 +23,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@app/*": ["src/app/*"],
+      "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@config/*": ["src/config/*"],
-      "@assets/*": ["src/assets/*"],
+      "@entities/*": ["src/entities/*"],
       "@shared/*": ["src/shared/*"],
       "@widgets/*": ["src/widgets/*"]
     }
