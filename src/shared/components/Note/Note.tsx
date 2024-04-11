@@ -6,9 +6,8 @@ import { NoteProps } from "./types";
 export const Note = ({ text, actions }: NoteProps) => {
   return (
     <Box className={styles.root}>
-      <div>
-        <Typography>{text}</Typography>
-      </div>
+      <Typography className={styles.text}>{text}</Typography>
+
       <div className={styles.actions}>{actions}</div>
     </Box>
   );

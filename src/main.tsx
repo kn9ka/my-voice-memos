@@ -2,9 +2,8 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import { mainTheme } from "@config/theme";
-
-import App from "@app/App";
+import App from "@/app/App";
+import { mainTheme } from "@/config/theme";
 
 export const theme = createTheme(mainTheme);
 

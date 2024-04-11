@@ -1,27 +1,23 @@
 import { ButtonGroup, TextField, TextFieldProps } from "@mui/material";
-import { useSpeechRecognition } from "@shared/libs/speechRecognition";
-import { useLiveQuery } from "dexie-react-hooks";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-import { notesStore } from "@entities/notes/store";
-
 import styles from "./RecordArea.module.scss";
 
+import { Note } from "@/entities/notes/types";
+import { useNotes } from "@/entities/notes/useNotes";
+import { notifyError } from "@/entities/notification";
 import { RecordButton, CancelButton, SaveButton } from "@/shared/components";
+import { useSpeechRecognition } from "@/shared/libs/speechRecognition";
 
 export const RecordArea = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const noteId = searchParams.get("note");
+  const { getById, update, add } = useNotes();
 
+  const [currentNote, setCurrentNote] = useState<Note | undefined>();
   const [text, setText] = useState("");
-
-  const currentNote = useLiveQuery(() => {
-    if (noteId) {
-      return notesStore.notes.where("id").equals(noteId).first();
-    }
-  }, [noteId]);
 
   const {
     start: startListen,
@@ -38,18 +34,22 @@ export const RecordArea = () => {
   }, [transcript]);
 
   useEffect(() => {
-    if (currentNote) {
-      setText(currentNote.text);
+    if (noteId) {
+      getById(noteId).then((note) => {
+        setCurrentNote(note);
+        setText(note?.text ?? "");
+      });
     }
-  }, [currentNote]);
+  }, [noteId, getById]);
 
   const reset = () => {
     setText("");
+    setCurrentNote(undefined);
+    setSearchParams("");
     if (isListening) {
       stopListen();
       resetTranscript();
     }
-    setSearchParams("");
   };
 
   const handleOnChange: TextFieldProps["onChange"] = (e) => {
@@ -65,33 +65,28 @@ export const RecordArea = () => {
     }
   };
 
-  const handleUpdate = async () => {
-    try {
-      await notesStore.notes.update(currentNote?.id, { text });
-    } catch (err) {
-      // show notification or something
-      console.error(err);
-    } finally {
-      reset();
+  const handleUpdate = () => {
+    if (!currentNote) {
+      return;
     }
+
+    update({ ...currentNote, text })
+      .then(reset)
+      .catch(notifyError);
   };
 
-  const handleSave = async () => {
+  const handleSave = () => {
     if (text.length === 0) {
       return;
     }
-    try {
-      await notesStore.notes.add({
-        id: uuidv4(),
-        createdTime: new Date().toISOString(),
-        text,
-      });
-    } catch (err) {
-      // show notification or something
-      console.error(err);
-    } finally {
-      reset();
-    }
+
+    add({
+      id: uuidv4(),
+      createdTime: new Date().toISOString(),
+      text,
+    })
+      .then(reset)
+      .catch(notifyError);
   };
 
   const handleCancel = () => {

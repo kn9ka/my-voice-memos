@@ -12,3 +12,9 @@
 .actions {
   margin-left: auto;
 }
+
+.text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

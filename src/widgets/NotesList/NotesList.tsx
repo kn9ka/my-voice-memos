@@ -1,16 +1,15 @@
 import { ButtonGroup, Divider, Stack } from "@mui/material";
-import { Note } from "@shared/components/Note";
-import { useLiveQuery } from "dexie-react-hooks";
 import { useSearchParams } from "react-router-dom";
 
 import { sortDatesASC } from "./helpers";
 
-import { notesStore } from "@/entities/notes/store";
-import { DeleteButton, EditButton } from "@/shared/components";
+import { useNotes } from "@/entities/notes/useNotes";
+import { DeleteButton, EditButton } from "@/shared/components/Buttons";
+import { Note } from "@/shared/components/Note";
 
 export const NotesList = () => {
   const [, setSearchParams] = useSearchParams();
-  const notes = useLiveQuery(() => notesStore.notes.toArray());
+  const { notes, remove } = useNotes();
   const sortedNotes = [...(notes || [])].sort((a, b) =>
     sortDatesASC(a.createdTime, b.createdTime)
   );
@@ -20,7 +19,7 @@ export const NotesList = () => {
   };
 
   const handleDelete = (id: string) => {
-    notesStore.notes.delete(id);
+    remove(id);
   };
 
   return (

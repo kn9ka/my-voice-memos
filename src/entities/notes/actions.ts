@@ -1,19 +1,13 @@
-// import { DataAccess } from "@shared/libs/indexDB";
-// import { Note } from "./types";
+import { notesStore } from "./store";
+import { Note } from "./types";
 
-// const DB_NAME = "my_voice_memos";
-// const STORE_NAME = "notes";
+export const addNote = async (note: Note) => {
+  await notesStore.notes.add(note);
+};
 
-// const storage = new DataAccess<Note>(DB_NAME, STORE_NAME);
-
-// export const setNote = async (note: Note) => {
-//   return await storage.add(note);
-// };
-
-// export const getNote = async (id: Note["uid"]): Promise<Note> => {
-//   return await storage.get(id);
-// };
-
-// export const getNotes = async (): Promise<Note[]> => {
-//   return await storage.retrieve();
-// };
+export const removeNote = async (id: Note["id"]) => {
+  await notesStore.notes.delete(id);
+};
+export const updateNote = async ({ id, ...rest }: Note) => {
+  await notesStore.notes.update(id, { ...rest });
+};
