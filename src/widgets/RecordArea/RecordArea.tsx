@@ -80,7 +80,7 @@ export const RecordArea = () => {
       />
       <div className={styles.actions}>
         <ButtonGroup>
-          <SaveButton onClick={handleSave} />
+          <SaveButton color="success" onClick={handleSave} />
           <CancelButton onClick={handleCancel} />
           <RecordButton onClick={handleRecord} />
         </ButtonGroup>

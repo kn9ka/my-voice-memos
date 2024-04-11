@@ -1,17 +1,17 @@
-import SaveIcon from "@mui/icons-material/Save";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
 
 import { ButtonProps } from "../types";
 
-export const SaveButton: React.FC<ButtonProps> = ({
+export const DeleteButton: React.FC<ButtonProps> = ({
   className,
-  color = "primary",
+  color = "success",
   fontSize = "large",
   onClick,
 }) => {
   return (
     <IconButton color={color} className={className} onClick={onClick}>
-      <SaveIcon fontSize={fontSize} />
+      <DeleteIcon fontSize={fontSize} />
     </IconButton>
   );
 };

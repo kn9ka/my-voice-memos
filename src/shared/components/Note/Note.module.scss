@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  flex-flow: row nowrap;
+  place-items: center;
+  background: #1a2027;
+  padding: var(--padding-small);
+  border-radius: 8px;
+}
+
+.actions {
+  margin-left: auto;
+}
