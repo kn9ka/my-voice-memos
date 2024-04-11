@@ -84,7 +84,10 @@ export const RecordArea = () => {
             <SaveButton color="success" onClick={handleSave} />
           )}
           {text.length > 0 && <CancelButton onClick={handleCancel} />}
-          <RecordButton onClick={handleRecord} />
+          <RecordButton
+            viewMode={isListening ? "recording" : "standBy"}
+            onClick={handleRecord}
+          />
         </ButtonGroup>
       </div>
     </div>
