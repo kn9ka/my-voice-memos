@@ -1,11 +1,13 @@
-import { RecordButton, CancelButton, SaveButton } from "@/shared/components";
-
-import styles from "./RecordArea.module.scss";
 import { ButtonGroup, TextField, TextFieldProps } from "@mui/material";
+import { useSpeechRecognition } from "@shared/libs/speechRecognition";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+
 import { notesStore } from "@entities/notes/store";
-import { useSpeechRecognition } from "@shared/libs/speechRecognition";
+
+import styles from "./RecordArea.module.scss";
+
+import { RecordButton, CancelButton, SaveButton } from "@/shared/components";
 
 export const RecordArea = () => {
   const [text, setText] = useState("");
@@ -24,7 +26,7 @@ export const RecordArea = () => {
     }
   }, [transcript]);
 
-  const reset = async () => {
+  const reset = () => {
     setText("");
     if (isListening) {
       stopListen();
@@ -68,10 +70,10 @@ export const RecordArea = () => {
   return (
     <div className={styles.root}>
       <TextField
-        label="Record your memory"
-        aria-describedby="memory-text"
         multiline
         fullWidth
+        label="Record your memory"
+        aria-describedby="memory-text"
         minRows={4}
         value={text}
         onChange={handleOnChange}

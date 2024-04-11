@@ -1,7 +1,8 @@
 import ReactSpeechRecognition, {
   useSpeechRecognition as useReactSpeechRecognition,
 } from "react-speech-recognition";
-import type { SpeechRecognition, SpeechRecognitionParams } from "./types";
+
+import { SpeechRecognition, SpeechRecognitionParams } from "./types";
 
 export const useSpeechRecognition = (
   options: SpeechRecognitionParams = {}

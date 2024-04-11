@@ -1,4 +1,5 @@
 import Dexie, { Table } from "dexie";
+
 import { Note } from "./types";
 
 export class NotesStore extends Dexie {

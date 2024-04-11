@@ -1,12 +1,17 @@
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "@app/App";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+
 import { mainTheme } from "@config/theme";
+
+import App from "@app/App";
 
 export const theme = createTheme(mainTheme);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = document.getElementById("root")!;
+
+ReactDOM.createRoot(root).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
