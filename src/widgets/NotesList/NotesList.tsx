@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 
 import { sortDatesASC } from "./helpers";
 
-import { useNotes } from "@/entities/notes/useNotes";
+import { useNotes } from "@/entities/notes";
 import { DeleteButton, EditButton } from "@/shared/components/Buttons";
 import { Note } from "@/shared/components/Note";
 

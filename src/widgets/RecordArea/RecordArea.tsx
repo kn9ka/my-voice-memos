@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
+import { useKeyboardShortcuts } from "./hooks";
 import styles from "./RecordArea.module.scss";
 
+import { useNotes } from "@/entities/notes";
 import { Note } from "@/entities/notes/types";
-import { useNotes } from "@/entities/notes/useNotes";
 import { notifyError } from "@/entities/notification";
 import { RecordButton, CancelButton, SaveButton } from "@/shared/components";
 import { useSpeechRecognition } from "@/shared/libs/speechRecognition";
-import { useKeyboardShortcuts } from "./hooks";
 
 export const RecordArea = () => {
   const [searchParams, setSearchParams] = useSearchParams();
