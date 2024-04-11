@@ -1,4 +1,5 @@
+@use "@/config/theme/variables.module.scss";
+
 .root {
   padding: 0 0 var(--padding-extra-large) 0;
-  overflow-x: hidden;
 }
