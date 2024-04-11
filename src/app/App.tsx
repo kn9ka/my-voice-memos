@@ -1,12 +1,13 @@
-import { MainRoute } from "@/pages/MainRoute";
-import { AppLayout } from "@/shared/ui/layouts/";
+import { BrowserRouter } from "react-router-dom";
+
 import "@config/theme/variables.module.scss";
+import { Navigation } from "./Navigation";
 
 export const App = () => {
   return (
-    <AppLayout>
-      <MainRoute />
-    </AppLayout>
+    <BrowserRouter basename="/">
+      <Navigation />
+    </BrowserRouter>
   );
 };
 

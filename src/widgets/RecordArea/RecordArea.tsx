@@ -1,6 +1,8 @@
 import { ButtonGroup, TextField, TextFieldProps } from "@mui/material";
 import { useSpeechRecognition } from "@shared/libs/speechRecognition";
+import { useLiveQuery } from "dexie-react-hooks";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import { notesStore } from "@entities/notes/store";
@@ -10,7 +12,16 @@ import styles from "./RecordArea.module.scss";
 import { RecordButton, CancelButton, SaveButton } from "@/shared/components";
 
 export const RecordArea = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const noteId = searchParams.get("note");
+
   const [text, setText] = useState("");
+
+  const currentNote = useLiveQuery(() => {
+    if (noteId) {
+      return notesStore.notes.where("id").equals(noteId).first();
+    }
+  }, [noteId]);
 
   const {
     start: startListen,
@@ -26,12 +37,19 @@ export const RecordArea = () => {
     }
   }, [transcript]);
 
+  useEffect(() => {
+    if (currentNote) {
+      setText(currentNote.text);
+    }
+  }, [currentNote]);
+
   const reset = () => {
     setText("");
     if (isListening) {
       stopListen();
       resetTranscript();
     }
+    setSearchParams("");
   };
 
   const handleOnChange: TextFieldProps["onChange"] = (e) => {
@@ -44,6 +62,17 @@ export const RecordArea = () => {
       stopListen();
     } else {
       startListen();
+    }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      await notesStore.notes.update(currentNote?.id, { text });
+    } catch (err) {
+      // show notification or something
+      console.error(err);
+    } finally {
+      reset();
     }
   };
 
@@ -65,7 +94,9 @@ export const RecordArea = () => {
     }
   };
 
-  const handleCancel = () => {};
+  const handleCancel = () => {
+    reset();
+  };
 
   return (
     <div className={styles.root}>
@@ -81,7 +112,10 @@ export const RecordArea = () => {
       <div className={styles.actions}>
         <ButtonGroup>
           {text.length > 0 && (
-            <SaveButton color="success" onClick={handleSave} />
+            <SaveButton
+              color="success"
+              onClick={currentNote ? handleUpdate : handleSave}
+            />
           )}
           {text.length > 0 && <CancelButton onClick={handleCancel} />}
           <RecordButton

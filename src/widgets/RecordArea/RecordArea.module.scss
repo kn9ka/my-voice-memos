@@ -1,9 +1,12 @@
 .root {
-  padding: var(--padding-extra-large);
   gap: var(--padding-extra-small);
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
+
+  &:not(:last-child) {
+    margin-bottom: var(--padding-medium);
+  }
 }
 
 .actions {
