@@ -15,10 +15,12 @@ export const useSpeechRecognition = (
 
   const start = () => ReactSpeechRecognition.startListening(options);
   const stop = () => ReactSpeechRecognition.stopListening();
+  const recognitionInstance = ReactSpeechRecognition.getRecognition();
 
   return {
     transcript,
     isListening: listening,
+    recognitionInstance,
     start,
     stop,
     reset,

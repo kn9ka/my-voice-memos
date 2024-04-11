@@ -7,6 +7,12 @@ import { useNotes } from "@/entities/notes/useNotes";
 import { DeleteButton, EditButton } from "@/shared/components/Buttons";
 import { Note } from "@/shared/components/Note";
 
+/**
+ *  @TODO: split notes by dates
+ * like: 2020-01-01
+ *       note1
+ *       note2
+ */
 export const NotesList = () => {
   const [, setSearchParams] = useSearchParams();
   const { notes, remove } = useNotes();

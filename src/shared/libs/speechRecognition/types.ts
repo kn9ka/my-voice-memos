@@ -4,6 +4,7 @@ import { ListeningOptions } from "react-speech-recognition";
 export type SpeechRecognition = {
   transcript: string;
   isListening: boolean;
+  recognitionInstance: globalThis.SpeechRecognition | null;
   start: () => Promise<void>;
   stop: () => Promise<void>;
   reset: () => void;

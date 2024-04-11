@@ -10,6 +10,7 @@ import { useNotes } from "@/entities/notes/useNotes";
 import { notifyError } from "@/entities/notification";
 import { RecordButton, CancelButton, SaveButton } from "@/shared/components";
 import { useSpeechRecognition } from "@/shared/libs/speechRecognition";
+import { useKeyboardShortcuts } from "./hooks";
 
 export const RecordArea = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -28,9 +29,7 @@ export const RecordArea = () => {
   } = useSpeechRecognition({ continuous: true, language: "en" });
 
   useEffect(() => {
-    if (transcript) {
-      setText(transcript);
-    }
+    setText(transcript);
   }, [transcript]);
 
   useEffect(() => {
@@ -46,8 +45,11 @@ export const RecordArea = () => {
     setText("");
     setCurrentNote(undefined);
     setSearchParams("");
+
     if (isListening) {
       stopListen();
+    }
+    if (transcript.length > 0) {
       resetTranscript();
     }
   };
@@ -61,6 +63,7 @@ export const RecordArea = () => {
     if (isListening) {
       stopListen();
     } else {
+      resetTranscript();
       startListen();
     }
   };
@@ -92,6 +95,10 @@ export const RecordArea = () => {
   const handleCancel = () => {
     reset();
   };
+
+  useKeyboardShortcuts({
+    onDownEsc: handleCancel,
+  });
 
   return (
     <div className={styles.root}>
