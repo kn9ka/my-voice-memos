@@ -6,7 +6,7 @@ import { Page } from "@/pages/pages";
 const routes = {
   [Page.Main]: {
     Component: MainRoute,
-    path: "/voice-memos",
+    path: "/",
   },
 };
 
